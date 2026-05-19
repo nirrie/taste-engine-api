@@ -1,5 +1,5 @@
 import { db } from "../config/db";
-import crypto from "crypto";
+import crypto from "node:crypto";
 
 export async function createChoice(
   sessionId: string,
