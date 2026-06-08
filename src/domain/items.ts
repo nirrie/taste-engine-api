@@ -27,7 +27,7 @@ export const items: TasteItem[] = [
         title: "Books",
         traits: ["calm", "thinker", "soothing"]
     },
-   
+
     {
         id: "4",
         title: "Theatre",
@@ -39,13 +39,13 @@ export const items: TasteItem[] = [
         title: "Video games",
         traits: ["innovative", "hedonistic", "playful"]
     },
-       
+
     {
         id: "6",
         title: "Doom scrolling",
         traits: ["soothing", "hedonistic", "impulsive"]
     },
-        
+
     {
         id: "7",
         title: "Journaling",
@@ -99,7 +99,7 @@ export const items: TasteItem[] = [
         title: "Cosplay",
         traits: ["playful", "creative", "extroverted", "quirky"]
     },
-    
+
     {
         id: "16",
         title: "Social media following",
@@ -122,5 +122,21 @@ export const items: TasteItem[] = [
         id: "19",
         title: "Clubbing",
         traits: ["energetic", "extroverted", "social", "hedonistic"]
+    },
+
+    {
+        id: "20",
+        title: "Fast food",
+        traits: ["hedonistic", "impulsive", "trending", "soothing"]
+    },
+    {
+        id: "21",
+        title: "Dieting",
+        traits: ["disciplined", "soothing", "aesthetic"]
+    },
+        {
+        id: "22",
+        title: "DIY",
+        traits: ["creative", "functional", "innovative"]
     },
 ];

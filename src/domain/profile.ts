@@ -15,7 +15,6 @@ export function applyChoice(
   selectedItem: TasteItem
 ): TasteProfile {
   const updatedProfile = { ...profile };
-
   for (const trait of selectedItem.traits) {
     updatedProfile[trait] += 1;
   }

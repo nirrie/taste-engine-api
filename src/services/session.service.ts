@@ -1,67 +1,90 @@
 import crypto from "crypto";
 import { redis } from "../config/redis";
-import { Session } from "../types/session.types";
-import { createSessionInDb, findSessionById } from "../repositories/session.repository";
-import { findChoicesBySessionId } from "../repositories/choice.repository";
+import { items } from "../domain/items";
+import { analyzeProfile } from "./profile.service";
+
+export type TasteSession = {
+  sessionId: string;
+  selectedItemIds: string[];
+  createdAt: string;
+};
+
+const SESSION_TTL_SECONDS = 60 * 60; // 1 hour
 
 
-export async function getSessionDetails(sessionId: string) {
-  const cacheKey = `session:${sessionId}:details`;
+export async function createSession(): Promise<TasteSession> {
+  const sessionId = crypto.randomUUID();
 
-  // 1. check cache
-  const cached = await redis.get(cacheKey);
+  const session: TasteSession = {
+    sessionId,
+    selectedItemIds: [],
+    createdAt: new Date().toISOString(),
+  };
 
-  if (cached) {
-    return JSON.parse(cached);
+  await redis.setEx(
+    `session:${sessionId}`,
+    SESSION_TTL_SECONDS,
+    JSON.stringify(session)
+  );
+
+  return session;
+}
+
+export async function getSession(
+  sessionId: string
+): Promise<TasteSession | null> {
+  const data = await redis.get(`session:${sessionId}`);
+
+  if (!data) {
+    return null;
+  }
+  return JSON.parse(data) as TasteSession;
+
+}
+
+export async function selectItemForSession(sessionId: string, itemId: string) {
+  const session = await getSession(sessionId);
+
+  if (!session) {
+    return null;
+  }
+  const itemExists = items.some((item) => item.id === itemId);
+
+  if (!itemExists) {
+    throw new Error("ITEM_NOT_FOUND");
   }
 
-  // 2. haal uit database
+  if (!session.selectedItemIds.includes(itemId)) {
+    session.selectedItemIds.push(itemId);
+  }
+  await redis.setEx(
+    `session:${sessionId}`,
+    SESSION_TTL_SECONDS,
+    JSON.stringify(session)
+  );
+
+  const profileResult = analyzeProfile(session.selectedItemIds);
+
+  return {
+    ...session,
+    profile: profileResult?.profile ?? {},
+    rankedProfile: profileResult?.rankedProfile ?? [],
+  };
+}
+
+export async function getSessionWithProfile(sessionId: string) {
   const session = await getSession(sessionId);
 
   if (!session) {
     return null;
   }
 
-  const choices = await findChoicesBySessionId(sessionId);
+  const profileResult = analyzeProfile(session.selectedItemIds);
 
-  // 3. bereken profile
-  let soft = 0;
-  let structured = 0;
-
-  for (const choice of choices) {
-    if (choice.selectedItemId === "a1") soft++;
-    if (choice.selectedItemId === "b1") structured++;
-  }
-
-  const result = {
-    session: {
-      ...session,
-      profile: { soft, structured }
-    },
-    choices
+  return {
+    ...session,
+    profile: profileResult?.profile ?? {},
+    rankedProfile: profileResult?.rankedProfile ?? [],
   };
 
-  // 4. opslaan in Redis (TTL = 60 sec)
-  await redis.set(cacheKey, JSON.stringify(result), {
-    EX: 60
-  });
-
-  return result;
-}
-
-export async function createSession(): Promise<Session> {
-  const session: Session = {
-  id: crypto.randomUUID(),
-  createdAt: new Date().toISOString(),
-  profile: {
-    soft: 0,
-    structured: 0
-  }
-};
-
-  return await createSessionInDb(session);
-}
-
-export async function getSession(sessionId: string): Promise<Session | null> {
-  return await findSessionById(sessionId);
 }
