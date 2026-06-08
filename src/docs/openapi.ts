@@ -5,19 +5,13 @@ const openApiSpec = {
     version: "1.0.0",
     description: "Taste Engine recommendation API",
   },
-  servers: [
-    {
-      url: "http://localhost:3000",
-    },
-  ],
+  servers: [{ url: "http://localhost:3000" }],
   paths: {
     "/health": {
       get: {
         summary: "Health check",
         responses: {
-          "200": {
-            description: "Service is healthy",
-          },
+          "200": { description: "Service is healthy" },
         },
       },
     },
@@ -31,12 +25,15 @@ const openApiSpec = {
             content: {
               "application/json": {
                 example: {
-                  count: 20,
+                  count: 22,
                   data: [
                     {
                       id: "1",
                       title: "Fiji water",
-                      traits: ["aesthetic", "luxury"],
+                      traits: [
+                        { key: "aesthetic", weight: 0.8, source: "manual" },
+                        { key: "luxury", weight: 0.6, source: "manual" },
+                      ],
                     },
                   ],
                 },
@@ -55,9 +52,7 @@ const openApiSpec = {
             name: "id",
             in: "path",
             required: true,
-            schema: {
-              type: "string",
-            },
+            schema: { type: "string" },
             example: "7",
           },
         ],
@@ -70,7 +65,12 @@ const openApiSpec = {
                   data: {
                     id: "7",
                     title: "Journaling",
-                    traits: ["warm", "thinker", "soothing", "creative"],
+                    traits: [
+                      { key: "warm", weight: 0.7, source: "manual" },
+                      { key: "thinker", weight: 0.8, source: "manual" },
+                      { key: "soothing", weight: 0.6, source: "manual" },
+                      { key: "creative", weight: 0.8, source: "manual" },
+                    ],
                   },
                 },
               },
@@ -80,9 +80,7 @@ const openApiSpec = {
             description: "Item not found",
             content: {
               "application/json": {
-                example: {
-                  error: "Item not found",
-                },
+                example: { error: "Item not found" },
               },
             },
           },
@@ -99,7 +97,7 @@ const openApiSpec = {
             content: {
               "application/json": {
                 example: {
-                  count: 3,
+                  count: 1,
                   data: [
                     {
                       key: "soothing",
@@ -122,19 +120,13 @@ const openApiSpec = {
             name: "key",
             in: "path",
             required: true,
-            schema: {
-              type: "string",
-            },
+            schema: { type: "string" },
             example: "soothing",
           },
         ],
         responses: {
-          "200": {
-            description: "Trait found",
-          },
-          "404": {
-            description: "Trait not found",
-          },
+          "200": { description: "Trait found" },
+          "404": { description: "Trait not found" },
         },
       },
     },
@@ -162,32 +154,41 @@ const openApiSpec = {
                     {
                       id: "7",
                       title: "Journaling",
-                      traits: ["warm", "thinker", "soothing", "creative"],
+                      traits: [
+                        { key: "warm", weight: 0.7, source: "manual" },
+                        { key: "thinker", weight: 0.8, source: "manual" },
+                        { key: "soothing", weight: 0.6, source: "manual" },
+                        { key: "creative", weight: 0.8, source: "manual" },
+                      ],
                     },
                     {
                       id: "18",
                       title: "Camping",
-                      traits: ["adventurous", "calm", "introverted", "soothing"],
+                      traits: [
+                        { key: "adventurous", weight: 0.8, source: "manual" },
+                        { key: "calm", weight: 0.7, source: "manual" },
+                        { key: "introverted", weight: 0.6, source: "manual" },
+                        { key: "soothing", weight: 0.6, source: "manual" },
+                      ],
                     },
                   ],
                   profile: {
-                    warm: 1,
-                    thinker: 1,
-                    soothing: 2,
-                    creative: 1,
-                    adventurous: 1,
-                    calm: 1,
-                    introverted: 1,
+                    warm: 0.7,
+                    thinker: 0.8,
+                    soothing: 1.2,
+                    creative: 0.8,
+                    adventurous: 0.8,
+                    calm: 0.7,
+                    introverted: 0.6,
                   },
                   rankedProfile: [
-                    {
-                      trait: "soothing",
-                      score: 2,
-                    },
-                    {
-                      trait: "warm",
-                      score: 1,
-                    },
+                    { trait: "soothing", score: 1.2 },
+                    { trait: "thinker", score: 0.8 },
+                    { trait: "creative", score: 0.8 },
+                    { trait: "adventurous", score: 0.8 },
+                    { trait: "warm", score: 0.7 },
+                    { trait: "calm", score: 0.7 },
+                    { trait: "introverted", score: 0.6 },
                   ],
                 },
               },
@@ -230,9 +231,7 @@ const openApiSpec = {
             name: "sessionId",
             in: "path",
             required: true,
-            schema: {
-              type: "string",
-            },
+            schema: { type: "string" },
             example: "14b42273-37d1-401b-87ce-05675a37d4f4",
           },
         ],
@@ -247,19 +246,22 @@ const openApiSpec = {
                     selectedItemIds: ["7", "18"],
                     createdAt: "2026-06-08T08:12:34.974Z",
                     profile: {
-                      warm: 1,
-                      thinker: 1,
-                      soothing: 2,
-                      creative: 1,
-                      adventurous: 1,
-                      calm: 1,
-                      introverted: 1,
+                      warm: 0.7,
+                      thinker: 0.8,
+                      soothing: 1.2,
+                      creative: 0.8,
+                      adventurous: 0.8,
+                      calm: 0.7,
+                      introverted: 0.6,
                     },
                     rankedProfile: [
-                      {
-                        trait: "soothing",
-                        score: 2,
-                      },
+                      { trait: "soothing", score: 1.2 },
+                      { trait: "thinker", score: 0.8 },
+                      { trait: "creative", score: 0.8 },
+                      { trait: "adventurous", score: 0.8 },
+                      { trait: "warm", score: 0.7 },
+                      { trait: "calm", score: 0.7 },
+                      { trait: "introverted", score: 0.6 },
                     ],
                   },
                 },
@@ -281,9 +283,7 @@ const openApiSpec = {
             name: "sessionId",
             in: "path",
             required: true,
-            schema: {
-              type: "string",
-            },
+            schema: { type: "string" },
             example: "14b42273-37d1-401b-87ce-05675a37d4f4",
           },
         ],
@@ -308,19 +308,22 @@ const openApiSpec = {
                     selectedItemIds: ["7", "18"],
                     createdAt: "2026-06-08T08:12:34.974Z",
                     profile: {
-                      warm: 1,
-                      thinker: 1,
-                      soothing: 2,
-                      creative: 1,
-                      adventurous: 1,
-                      calm: 1,
-                      introverted: 1,
+                      warm: 0.7,
+                      thinker: 0.8,
+                      soothing: 1.2,
+                      creative: 0.8,
+                      adventurous: 0.8,
+                      calm: 0.7,
+                      introverted: 0.6,
                     },
                     rankedProfile: [
-                      {
-                        trait: "soothing",
-                        score: 2,
-                      },
+                      { trait: "soothing", score: 1.2 },
+                      { trait: "thinker", score: 0.8 },
+                      { trait: "creative", score: 0.8 },
+                      { trait: "adventurous", score: 0.8 },
+                      { trait: "warm", score: 0.7 },
+                      { trait: "calm", score: 0.7 },
+                      { trait: "introverted", score: 0.6 },
                     ],
                   },
                 },

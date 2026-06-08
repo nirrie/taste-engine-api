@@ -1,142 +1,135 @@
 // items.ts
 // Traits are subjective signals and not objective facts.
-
-import { Trait } from "./traits";
-
-export type TasteItem = {
-    id: string;
-    title: string;
-    traits: Trait[];
-};
+import { TasteItem } from "../types/item.types";
 
 export const items: TasteItem[] = [
     {
         id: "1",
         title: "Fiji water",
-        traits: ["aesthetic", "luxury"]
+        traits: [{ key: "aesthetic", weight: 0.8, source: "manual" }, { key: "luxury", weight: 0.6, source: "manual" }]
     },
 
     {
         id: "2",
         title: "Tiny house",
-        traits: ["minimalistic", "structured", "functional"]
+        traits: [{ key: "minimalistic", weight: 0.7, source: "manual" }, { key: "structured", weight: 0.6, source: "manual" }, { key: "functional", weight: 0.8, source: "manual" }]
     },
 
     {
         id: "3",
         title: "Books",
-        traits: ["calm", "thinker", "soothing"]
+        traits: [{ key: "calm", weight: 0.7, source: "manual" }, { key: "thinker", weight: 0.8, source: "manual" }, { key: "soothing", weight: 0.6, source: "manual" }]
     },
 
     {
         id: "4",
         title: "Theatre",
-        traits: ["feeler", "energetic", "playful"]
+        traits: [{ key: "feeler", weight: 0.7, source: "manual" }, { key: "energetic", weight: 0.8, source: "manual" }, { key: "playful", weight: 0.6, source: "manual" }]
     },
 
     {
         id: "5",
         title: "Video games",
-        traits: ["innovative", "hedonistic", "playful"]
+        traits: [{ key: "innovative", weight: 0.8, source: "manual" }, { key: "pleasure_seeking", weight: 0.7, source: "manual" }, { key: "playful", weight: 0.6, source: "manual" }]
     },
 
     {
         id: "6",
         title: "Doom scrolling",
-        traits: ["soothing", "hedonistic", "impulsive"]
+        traits: [{ key: "soothing", weight: 0.7, source: "manual" }, { key: "pleasure_seeking", weight: 0.8, source: "manual" }, { key: "spontaneous", weight: 0.6, source: "manual" }]
     },
 
     {
         id: "7",
         title: "Journaling",
-        traits: ["warm", "thinker", "soothing", "creative"]
+        traits: [{ key: "warm", weight: 0.7, source: "manual" }, { key: "thinker", weight: 0.8, source: "manual" }, { key: "soothing", weight: 0.6, source: "manual" }, { key: "creative", weight: 0.8, source: "manual" }]
     },
 
     {
         id: "8",
         title: "Fitness",
-        traits: ["disciplined", "soothing", "aesthetic"]
+        traits: [{ key: "disciplined", weight: 0.8, source: "manual" }, { key: "soothing", weight: 0.6, source: "manual" }, { key: "aesthetic", weight: 0.7, source: "manual" }]
     },
 
     {
         id: "9",
         title: "Vlogging",
-        traits: ["adventurous", "trending", "playful", "creative"]
+        traits: [{ key: "adventurous", weight: 0.8, source: "manual" }, { key: "trending", weight: 0.7, source: "manual" }, { key: "playful", weight: 0.6, source: "manual" }, { key: "creative", weight: 0.8, source: "manual" }]
     },
 
     {
         id: "10",
         title: "Anime",
-        traits: ["quirky", "fantasy", "soothing", "creative"]
+        traits: [{ key: "quirky", weight: 0.8, source: "manual" }, { key: "fantasy", weight: 0.7, source: "manual" }, { key: "soothing", weight: 0.6, source: "manual" }, { key: "creative", weight: 0.8, source: "manual" }]
     },
 
     {
         id: "11",
         title: "Planner",
-        traits: ["organized", "disciplined", "thinker", "creative"]
+        traits: [{ key: "organized", weight: 0.8, source: "manual" }, { key: "disciplined", weight: 0.6, source: "manual" }, { key: "thinker", weight: 0.8, source: "manual" }, { key: "creative", weight: 0.8, source: "manual" }]
     },
 
     {
         id: "12",
         title: "Perfume",
-        traits: ["aesthetic", "luxury", "extroverted", "social"]
+        traits: [{ key: "aesthetic", weight: 0.8, source: "manual" }, { key: "luxury", weight: 0.6, source: "manual" }, { key: "extroverted", weight: 0.7, source: "manual" }, { key: "social", weight: 0.6, source: "manual" }]
     },
 
     {
         id: "13",
         title: "Fishing",
-        traits: ["adventurous", "calm", "introverted", "soothing"]
+        traits: [{ key: "adventurous", weight: 0.8, source: "manual" }, { key: "calm", weight: 0.7, source: "manual" }, { key: "introverted", weight: 0.6, source: "manual" }, { key: "soothing", weight: 0.6, source: "manual" }]
     },
 
     {
         id: "14",
         title: "Shopping",
-        traits: ["social", "trending", "impulsive", "hedonistic"]
+        traits: [{ key: "social", weight: 0.6, source: "manual" }, { key: "trending", weight: 0.7, source: "manual" }, { key: "spontaneous", weight: 0.6, source: "manual" }, { key: "pleasure_seeking", weight: 0.8, source: "manual" }]
     },
 
     {
         id: "15",
         title: "Cosplay",
-        traits: ["playful", "creative", "extroverted", "quirky"]
+        traits: [{ key: "playful", weight: 0.6, source: "manual" }, { key: "creative", weight: 0.8, source: "manual" }, { key: "extroverted", weight: 0.7, source: "manual" }, { key: "quirky", weight: 0.8, source: "manual" }]
     },
 
     {
         id: "16",
         title: "Social media following",
-        traits: ["trending", "arrogance", "social", "impulsive"]
+        traits: [{ key: "trending", weight: 0.7, source: "manual" }, { key: "status_oriented", weight: 0.6, source: "manual" }, { key: "social", weight: 0.6, source: "manual" }, { key: "spontaneous", weight: 0.6, source: "manual" }]
     },
 
     {
         id: "17",
         title: "Memes",
-        traits: ["trending", "playful", "impulsive", "soothing", "social"]
+        traits: [{ key: "trending", weight: 0.7, source: "manual" }, { key: "playful", weight: 0.6, source: "manual" }, { key: "spontaneous", weight: 0.6, source: "manual" }, { key: "soothing", weight: 0.7, source: "manual" }, { key: "social", weight: 0.6, source: "manual" }]
     },
 
     {
         id: "18",
         title: "Camping",
-        traits: ["adventurous", "calm", "introverted", "soothing"]
+        traits: [{ key: "adventurous", weight: 0.8, source: "manual" }, { key: "calm", weight: 0.7, source: "manual" }, { key: "introverted", weight: 0.6, source: "manual" }, { key: "soothing", weight: 0.6, source: "manual" }]
     },
 
     {
         id: "19",
         title: "Clubbing",
-        traits: ["energetic", "extroverted", "social", "hedonistic"]
+        traits: [{ key: "energetic", weight: 0.8, source: "manual" }, { key: "extroverted", weight: 0.7, source: "manual" }, { key: "social", weight: 0.6, source: "manual" }, { key: "pleasure_seeking", weight: 0.8, source: "manual" }]
     },
 
     {
         id: "20",
         title: "Fast food",
-        traits: ["hedonistic", "impulsive", "trending", "soothing"]
+        traits: [{ key: "pleasure_seeking", weight: 0.8, source: "manual" }, { key: "spontaneous", weight: 0.6, source: "manual" }, { key: "trending", weight: 0.7, source: "manual" }, { key: "soothing", weight: 0.7, source: "manual" }]
     },
     {
         id: "21",
-        title: "Dieting",
-        traits: ["disciplined", "soothing", "aesthetic"]
+        title: "Nutrition tracking",
+        traits: [{ key: "structured", weight: 0.8, source: "manual" }, { key: "disciplined", weight: 0.6, source: "manual" }, { key: "functional", weight: 0.7, source: "manual" }, { key: "health_conscious", weight: 0.8, source: "manual" }]
     },
         {
         id: "22",
         title: "DIY",
-        traits: ["creative", "functional", "innovative"]
+        traits: [{ key: "creative", weight: 0.8, source: "manual" }, { key: "functional", weight: 0.6, source: "manual" }, { key: "innovative", weight: 0.8, source: "manual" }, { key: "playful", weight: 0.6, source: "manual" }]
     },
 ];
