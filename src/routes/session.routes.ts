@@ -5,6 +5,7 @@ import {
   getSessionWithProfile,
   selectItemForSession,
 } from "../services/session.service";
+import { getRecommendations } from "../services/recommendation.service";
 
 
 const router = Router();
@@ -73,6 +74,31 @@ router.get("/:sessionId", async (req: Request, res: Response) => {
 
   res.json({
     data: session,
+  });
+});
+
+router.get("/:sessionId/recommendations", async (req: Request, res: Response) => {
+  const sessionIdParam = req.params.sessionId;
+  const sessionId = Array.isArray(sessionIdParam) ? sessionIdParam[0] : sessionIdParam;
+
+  if (!sessionId) {
+    return res.status(400).json({ error: "Invalid session id" });
+  }
+
+  const session = await getSession(sessionId);
+
+  if (!session) {
+    return res.status(404).json({
+      error: "SESSION_NOT_FOUND",
+    });
+  }
+
+  const recommendations = getRecommendations(
+    session.selectedItemIds
+  );
+
+  return res.json({
+    data: recommendations,
   });
 });
 

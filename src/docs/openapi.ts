@@ -339,6 +339,70 @@ const openApiSpec = {
         },
       },
     },
+    "/session/{sessionId}/recommendations": {
+      get: {
+        summary: "Get recommendations for a session",
+        parameters: [
+          {
+            name: "sessionId",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+            },
+            example: "34711ef6-66ec-4ab4-bfb2-591cedcdfce1",
+          },
+        ],
+        responses: {
+          "200": {
+            description: "Recommended items based on session profile",
+            content: {
+              "application/json": {
+                example: {
+                  data: [
+                    {
+                      itemId: "13",
+                      title: "Fishing",
+                      matchScore: 2.21,
+                    },
+                    {
+                      itemId: "3",
+                      title: "Books",
+                      matchScore: 1.85,
+                    },
+                    {
+                      itemId: "10",
+                      title: "Anime",
+                      matchScore: 1.36,
+                    },
+                    {
+                      itemId: "9",
+                      title: "Vlogging",
+                      matchScore: 1.28,
+                    },
+                    {
+                      itemId: "11",
+                      title: "Planner",
+                      matchScore: 1.28,
+                    },
+                  ],
+                },
+              },
+            },
+          },
+          "404": {
+            description: "Session not found",
+            content: {
+              "application/json": {
+                example: {
+                  error: "SESSION_NOT_FOUND",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
 };
 

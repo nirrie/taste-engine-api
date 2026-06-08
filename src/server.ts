@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import app from "./app";
 import { testDbConnection } from "./config/db";
-import { connectRedis } from "./config/redis";
+import { connectRedis } from "./config/redis"; 
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000
 async function startServer() {

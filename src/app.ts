@@ -4,7 +4,6 @@ import itemsRouter from "./routes/items.routes";
 import traitsRouter from "./routes/traits.routes";
 import sessionRoutes from "./routes/session.routes";
 import comparisonRoutes from "./routes/comparison.routes";
-import choiceRoutes from "./routes/choice.routes";
 import profileRouter from "./routes/profile.routes";
 import healthRouter from "./routes/health.routes";
 import openApiSpec from "./docs/openapi";
@@ -32,7 +31,6 @@ app.get("/", (_req, res) => {
 
 app.use("/session", sessionRoutes);
 app.use("/comparison", comparisonRoutes);
-app.use("/choice", choiceRoutes);
 app.use("/profile", profileRouter);
 
 app.use((
